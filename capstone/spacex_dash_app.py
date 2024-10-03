@@ -13,9 +13,6 @@ spacex_df = pd.read_csv("spacex_launch_dash.csv")
 max_payload = spacex_df['Payload Mass (kg)'].max()
 min_payload = spacex_df['Payload Mass (kg)'].min()
 
-# print(min_payload)
-# print(max_payload)
-
 
 
 
@@ -107,7 +104,7 @@ def get_pie_chart(entered_site):
 # Add a callback function for `site-dropdown` and `payload-slider` as inputs, `success-payload-scatter-chart` as output
 @app.callback(Output(component_id='success-payload-scatter-chart', component_property='figure'),
               [Input(component_id='site-dropdown', component_property='value'), 
-              Input(component_id="payload-slider", component_property='value')
+              Input(component_id="payload-slider", component_property="value")
               ]
               )
 
@@ -116,7 +113,8 @@ def get_success_payload_scatter_chart(entered_site, df):
     if entered_site == 'ALL':
         fig = px.scatter(spacex_df, x='Payload Mass (kg)', 
         y='class', 
-        color='Booster Version Category')
+        color='Booster Version Category',
+        title='Correlation of suceess and payload for all sites')
         return fig
     else:
          # return the outcomes for  selected site
@@ -127,7 +125,8 @@ def get_success_payload_scatter_chart(entered_site, df):
         fig = px.scatter(spacex_df_payload_2, 
             x='Payload Mass (kg)', 
             y='class', 
-            color='Booster Version Category')
+            color='Booster Version Category',
+            title='Correlation of suceess and payload for' + entered_site)
         return fig
        
 
